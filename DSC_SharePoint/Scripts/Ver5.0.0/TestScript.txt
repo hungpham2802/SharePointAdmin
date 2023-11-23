@@ -1,0 +1,187 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+                                                                                                                        Try the new cross-platform PowerShell https://aka.ms/pscore6                                                                                                                                                                                    PS C:\WINDOWS\system32> Install-Module -Name xPSDesiredStateConfiguration                                                                                                                                                                       Untrusted repository
+You are installing the modules from an untrusted repository. If you trust this repository, change its
+InstallationPolicy value by running the Set-PSRepository cmdlet. Are you sure you want to install the modules from
+'PSGallery'?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"): y
+PS C:\WINDOWS\system32> Install-Module -Name SharePointDsc
+
+Untrusted repository
+You are installing the modules from an untrusted repository. If you trust this repository, change its
+InstallationPolicy value by running the Set-PSRepository cmdlet. Are you sure you want to install the modules from
+'PSGallery'?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"): y
+WARNING: Version '1.0.0.0' of module 'SharePointDSC' is already installed at 'C:\Program
+Files\WindowsPowerShell\Modules\SharePointDSC\1.0.0.0'. To install version '5.4.0', run Install-Module and add the
+-Force parameter, this command will install version '5.4.0' in side-by-side with version '1.0.0.0'.
+PS C:\WINDOWS\system32> Install-Module -Name SharePointDsc -Force
+PS C:\WINDOWS\system32> cd "C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0"
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $configuration = @{
+>>     AllNodes = @(
+>>         @{
+>>             NodeName = "*"
+>>             PSDscAllowPlainTextPassword = $true
+>>             PSDscAllowDomainUser = $true;
+>>         },
+>>         @{
+>>             FarmName = "SIF_STG"
+>>             FarmType = "SP16"
+>>             NodeName = "SFSHP16STG1.mcs01.unicc.org"
+>>             IsCA = $true
+>>         },
+>>         @{
+>>             FarmName = "SIF_PRD"
+>>             FarmType = "SP16"
+>>             NodeName = "SFSHP16PRD1.mcs01.unicc.org"
+>>             IsCA = $true
+>>         },
+>>         @{
+>>             FarmName = "SIF_PRD"
+>>             FarmType = "SP16"
+>>             NodeName = "SFSHP16PRD2.mcs01.unicc.org"
+>>             IsCA = $false
+>>         },
+>>     @{
+>>             FarmName = "SIF_PRD"
+>>             FarmType = "SP16"
+>>             NodeName = "SFSHP16PRD3.mcs01.unicc.org"
+>>             IsCA = $false
+>>         },
+>>         @{
+>>             FarmName = "IFAD_STG"
+>>             FarmType = "SP16"
+>>             NodeName = "IFSHP16STG1.mcs01.unicc.org"
+>>             IsCA = $true
+>>         },
+>>          @{
+>>             FarmName = "IFAD_PRD"
+>>             FarmType = "SP16"
+>>             NodeName = "IFSHP16PRD1.mcs01.unicc.org"
+>>             IsCA = $true
+>>         },
+>>         @{
+>>             FarmName = "IFAD_PRD"
+>>             FarmType = "SP16"
+>>             NodeName = "IFSHP16PRD2.mcs01.unicc.org"
+>>             IsCA = $false
+>>         },
+>>         @{
+>>             FarmName = "IFAD_PRD"
+>>             FarmType = "SP16"
+>>             NodeName = "IFSHP16PRD3.mcs01.unicc.org"
+>>             IsCA = $false
+>>         },
+>>          @{
+>>             FarmName = "ICJ_PRD"
+>>             FarmType = "SPSE"
+>>             NodeName = "CJSHPSEPRD1.mcs01.unicc.org"
+>>             IsCA = $true
+>>         },
+>>          @{
+>>             FarmName = "ICJ_PRD"
+>>             FarmType = "SPSE"
+>>             NodeName = "CJSHPSEPRD2.mcs01.unicc.org"
+>>             IsCA = $false
+>>         },
+>>          @{
+>>             FarmName = "ICJ_PRD"
+>>             FarmType = "SPSE"
+>>             NodeName = "CJSHPSEPRD3.mcs01.unicc.org"
+>>             IsCA = $false
+>>         },
+>>          @{
+>>             FarmName = "ICJ_DR"
+>>             FarmType = "SPSE"
+>>             NodeName = "CJSHPSEDR1.mcs01.unicc.org"
+>>             IsCA = $false
+>>         }
+>>
+>>     )
+>>     NonNodeData = @{
+>>         PathInfo = @{
+>>             FarmType = "SPSE"
+>>             FarmVersion = "16.0.16731.20252-October2023"
+>>             CorePath =@{
+>>                 Url = "https://download.microsoft.com/download/a/7/d/a7d95f46-a0b6-4c5a-ade2-b61e57949172/sts2016-kb5002494-fullfile-x64-glb.exe"
+>>                 ChecksumType    = "SHA256"
+>>                 Checksum        = "E773C65A7D0F2736786118DDBEBAC03FA4D7DACAFD9167F42E5F3F7BBE1B575E"
+>>             }
+>>             LangPath = @{
+>>                 Url = ""
+>>                 IsExist = $false
+>>                 ChecksumType    = "SHA256"
+>>                 Checksum        = ""
+>>             }
+>>         },
+>>         @{
+>>             FarmType = "SP19"
+>>             FarmVersion = "16.0.10403.20000-October2023"
+>>             CorePath =@{
+>>                 Url = "https://download.microsoft.com/download/a/7/d/a7d95f46-a0b6-4c5a-ade2-b61e57949172/sts2016-kb5002494-fullfile-x64-glb.exe"
+>>                 ChecksumType    = "SHA256"
+>>                 Checksum        = "E773C65A7D0F2736786118DDBEBAC03FA4D7DACAFD9167F42E5F3F7BBE1B575E"
+>>             }
+>>             LangPath = @{
+>>                 Url = "https://download.microsoft.com/download/f/8/8/f8896fb2-c52e-4653-8c61-f1f4f8f11fbe/wssloc2016-kb5002501-fullfile-x64-glb.exe"
+>>                 IsExist = $false
+>>                 ChecksumType    = "SHA256"
+>>                 Checksum        = ""
+>>             }
+>>         },
+>>         @{
+>>             FarmType = "SP16"
+>>             FarmVersion = "16.0.5413.1001-September2023"
+>>             CorePath =@{
+>>                 Url = "https://download.microsoft.com/download/a/7/d/a7d95f46-a0b6-4c5a-ade2-b61e57949172/sts2016-kb5002494-fullfile-x64-glb.exe"
+>>                 ChecksumType    = "SHA256"
+>>                 Checksum        = "E773C65A7D0F2736786118DDBEBAC03FA4D7DACAFD9167F42E5F3F7BBE1B575E"
+>>             }
+>>             LangPath = @{
+>>                 Url = "https://download.microsoft.com/download/f/8/8/f8896fb2-c52e-4653-8c61-f1f4f8f11fbe/wssloc2016-kb5002501-fullfile-x64-glb.exe"
+>>                 IsExist = $true
+>>                 ChecksumType    = "SHA256"
+>>                 Checksum        = "4552D3F1CAF83BBC0657B0689DDF6136B9C70F361B3C804AEAD95170D08CD685"
+>>             }
+>>         }
+>>     }
+>> }
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $CAServer = ($Configuration.AllNodes | Where-Object { $_.IsCA -eq $true } | Select-Object -First 1).NodeName
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $CAServer
+SFSHP16STG1.mcs01.unicc.org
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $RelatedServer = $Configuration.AllNodes | Where-Object {$_.FarmName -eq "SIF_PRD" }
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $RelatedServer
+
+Name                           Value
+----                           -----
+FarmName                       SIF_PRD
+NodeName                       SFSHP16PRD1.mcs01.unicc.org
+IsCA                           True
+FarmType                       SP16
+FarmName                       SIF_PRD
+NodeName                       SFSHP16PRD2.mcs01.unicc.org
+IsCA                           False
+FarmType                       SP16
+FarmName                       SIF_PRD
+NodeName                       SFSHP16PRD3.mcs01.unicc.org
+IsCA                           False
+FarmType                       SP16
+
+
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $farmType = ($RelatedServer | Select-Object -First 1).FarmType
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $farmType
+SP16
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $PathInfo = $configuration.NonNodeData.PathInfo | Where-Object {$_.FarmType -eq $farmType }
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $PathInfo
+
+Name                           Value
+----                           -----
+LangPath                       {IsExist, Url, Checksum, ChecksumType}
+CorePath                       {ChecksumType, Url, Checksum}
+FarmVersion                    16.0.5413.1001-September2023
+FarmType                       SP16
+
+
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0> $PathInfo.CorePath.Url
+https://download.microsoft.com/download/a/7/d/a7d95f46-a0b6-4c5a-ade2-b61e57949172/sts2016-kb5002494-fullfile-x64-glb.exe
+PS C:\Users\Admin\Desktop\DSC_SharePoint\Scripts\Ver5.0.0>

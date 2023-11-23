@@ -1,0 +1,22 @@
+#Open firewall for SQL
+New-NetFirewallRule -DisplayName "SQLServer default instance" -Direction Inbound -LocalPort 1433 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "SQLServer Browser service" -Direction Inbound -LocalPort 1434 -Protocol UDP -Action Allow
+
+
+#Open firewall for DC
+
+# Define an array of port numbers
+$ports = 22233, 22234, 22235, 22236
+
+# Loop through each port and create a firewall rule for it
+foreach ($port in $ports) {
+    $ruleName = "AllowPort$port"
+    $rule = New-NetFirewallRule -DisplayName $ruleName -Direction Inbound -Action Allow -Protocol TCP -LocalPort $port
+    Write-Host "Firewall rule created for port $port."
+}
+
+Write-Host "Firewall rules for ports $($ports -join ', ') have been created."
+
+
+#increase request size
+Set-Item -Path WSMan:\localhost\MaxEnvelopeSizeKb -Value 2048
